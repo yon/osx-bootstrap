@@ -1,4 +1,4 @@
-all:	atom brew cleanmymac dropbox google-chrome istat-menus keychain whatsapp
+default:	atom brew cleanmymac dropbox google-chrome istat-menus keychain whatsapp
 
 1password:	brew /Applications/1Password\ 7.app/Contents/MacOS/1Password\ 7
 
