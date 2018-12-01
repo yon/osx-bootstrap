@@ -1,4 +1,4 @@
-default:	atom brew cleanmymac dropbox google-chrome istat-menus keychain whatsapp
+default:	osx-preferences atom brew cleanmymac dropbox google-chrome istat-menus keychain whatsapp
 
 1password:	brew /Applications/1Password\ 7.app/Contents/MacOS/1Password\ 7
 
@@ -40,6 +40,15 @@ keychain:	brew /usr/local/bin/keychain
 /usr/local/bin/keychain:
 	brew install keychain
 
+osx-preferences:
+	defaults write -g AppleLanguages -array "en-US" "es-US"
+	defaults write -g AppleMiniaturizeOnDoubleClick -int 0;
+	defaults write -g AppleShowAllExtensions -int 1;
+	defaults write -g InitialKeyRepeat -int 1
+	defaults write -g KeyRepeat -int 1
+	defaults write -g NSUserDictionaryReplacementItems -array '{on=1;replace="(shrug)";with="\\U00af\\\\_(\\U30c4)_/\\U00af";}' '{on=1;replace=aapl;with="\\Uf8ff";}' '{on=1;replace=bb;with=bb;}' '{on=1;replace=jy;with="\\U56db";}' '{on=1;replace=omw;with="On my way";}' '{on=1;replace=shrug;with="\\U00af\\\\_(\\U30c4)_/\\U00af";}' '{on=1;replace=yf;with=yonatanfeldman;}'
+	defaults write -g NSUserKeyEquivalents '{"Hide Others"="@~h";}'
+
 vmware-fusion:	brew /Applications/VMware\ Fusion.app/Contents/MacOS/VMware\ Fusion
 
 /Applications/VMware\ Fusion.app/Contents/MacOS/VMware\ Fusion:
@@ -50,4 +59,4 @@ whatsapp:	brew /Applications/WhatsApp.app/Contents/MacOS/WhatsApp
 /Applications/WhatsApp.app/Contents/MacOS/WhatsApp:
 	brew cask install whatsapp
 
-.PHONY:	1password all atom brew cleanmymac dropbox google-chrome istat-menus keychain vmware-fusion whatsapp
+.PHONY:	1password all atom brew cleanmymac dropbox google-chrome istat-menus keychain osx-preferences vmware-fusion whatsapp
