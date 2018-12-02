@@ -50,7 +50,7 @@ for vs in 'DesktopViewSettings' \
 done
 
 /usr/libexec/PlistBuddy \
-  -c "Set :DesktopViewSettings:GroupBy string none" \
+  -c 'Set :DesktopViewSettings:GroupBy string none' \
   ~/Library/Preferences/com.apple.finder.plist
 
 for vs in 'FK_StandardViewSettings' \
@@ -98,5 +98,5 @@ done
 chflags nohidden ~/Library
 sudo chflags nohidden /Volumes
 
-killall "Finder" &> /dev/null
-killall "cfprefsd" &> /dev/null
+killall 'Finder' &> /dev/null
+killall 'cfprefsd' &> /dev/null

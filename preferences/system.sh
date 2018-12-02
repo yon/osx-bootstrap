@@ -128,3 +128,5 @@ for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
 done
 defaults write com.apple.systemuiserver menuExtras -array \
 	'/System/Library/CoreServices/Menu Extras/AirPort.menu'
+
+killall 'Dock' &> /dev/null
