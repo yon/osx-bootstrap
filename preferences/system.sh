@@ -1,23 +1,37 @@
 #!/usr/bin/env bash
 
+osascript -e 'tell application "System Preferences" to quit'
+
+sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 defaults -currentHost write com.apple.screensaver idleTime -int 600
 defaults -currentHost write com.apple.screensaver showClock -bool true
 defaults write ~/Library/Preferences/ByHost/com.apple.coreservices.useractivityd ActivityAdvertisingAllowed -bool true
 defaults write ~/Library/Preferences/ByHost/com.apple.coreservices.useractivityd ActivityReceivingAllowed -bool true
 defaults write AppleEnableSwipeNavigateWithScrolls -bool false
 defaults write CGDisableCursorLocationMagnification -bool false
+defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
+defaults write com.apple.ActivityMonitor ShowCategory -int 0
+defaults write com.apple.ActivityMonitor SortColumn -string 'CPUUsage'
+defaults write com.apple.ActivityMonitor SortDirection -int 0
+defaults write com.apple.addressbook ABShowDebugMenu -bool true
 defaults write com.apple.AppleMultitouchTrackpad ActuateDetents -bool true
 defaults write com.apple.AppleMultitouchTrackpad ActuationStrength -int 0
 defaults write com.apple.AppleMultitouchTrackpad FirstClickThreshold -int 0
 defaults write com.apple.AppleMultitouchTrackpad ForceSuppressed -bool false
 defaults write com.apple.AppleMultitouchTrackpad SecondClickThreshold -int 0
+defaults write com.apple.appstore ShowDebugMenu -bool true
+defaults write com.apple.appstore WebKitDeveloperExtras -bool true
 defaults write com.apple.assistant.support 'Dictation Enabled' -bool true
 defaults write com.apple.BezelServices dAuto -bool false
 defaults write com.apple.BezelServices kDim -bool true
 defaults write com.apple.BezelServices kDimTime -int 300
+defaults write com.apple.commerce AutoUpdate -bool true
+defaults write com.apple.commerce AutoUpdateRestartRequired -bool true
 defaults write com.apple.controlstrip MiniCustomized -array com.apple.system.brightness com.apple.system.mute com.apple.system.volume com.apple.system.screen-lock
 defaults write com.apple.CrashReporter UseUNC 1
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock checked-for-launchpad -bool true
 defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
@@ -40,23 +54,6 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -bool
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad DragLock -bool false
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerHorizSwipeGesture -int 0
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 0
-defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
-defaults write com.apple.finder AppleShowAllFiles -bool true
-defaults write com.apple.finder DisableAllAnimations -bool true
-defaults write com.apple.finder FXDefaultSearchScope -string 'SCcf'
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-defaults write com.apple.finder FXPreferredViewStyle -string 'clmv'
-defaults write com.apple.finder NewWindowTarget -string 'PfLo'
-defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
-defaults write com.apple.finder QLEnableTextSelection -bool true
-defaults write com.apple.finder QuitMenuItem -bool true
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
-defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
-defaults write com.apple.finder WarnOnEmptyTrash -bool false
-defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
-defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
 defaults write com.apple.helpviewer DevMode -bool true
 defaults write com.apple.ImageCapture disableHotPlug -bool true
 defaults write com.apple.iTunes disablePing -bool true
@@ -65,13 +62,16 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
 defaults write com.apple.loginwindow TALLogoutSavesState -bool false
 defaults write com.apple.menuextra.clock DateFormat -string 'HH:mm'
-defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 defaults write com.apple.notificationcenterui bannerTime -float 2.5
 defaults write com.apple.preferences.extensions.ShareMenu displayOrder -array 'com.apple.share.System.add-to-safari-reading-list' 'com.apple.share.Messages.compose' 'com.apple.share.AirDrop.send' 'com.apple.share.Mail.compose' 'com.apple.share.Facebook.post' 'com.apple.share.Twitter.post'
 defaults write com.apple.print.PrintingPrefs 'Quit When Finished' -bool true
 defaults write com.apple.screencapture disable-shadow -bool true
 defaults write com.apple.screencapture type -string png
 defaults write com.apple.Siri StatusMenuVisible -bool false
+defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
+defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1
+defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 defaults write com.apple.speech.recognition.AppleSpeechRecognition.prefs DictationIMIntroMessagePresented -bool true
 defaults write com.apple.speech.recognition.AppleSpeechRecognition.prefs DictationIMMasterDictationEnabled -bool true
@@ -79,16 +79,19 @@ defaults write com.apple.speech.recognition.AppleSpeechRecognition.prefs Dictati
 defaults write com.apple.speech.recognition.AppleSpeechRecognition.prefs DictationIMSIFolderWasUpdated -bool true
 defaults write com.apple.speech.recognition.AppleSpeechRecognition.prefs DictationIMUseOnlyOfflineDictation -bool true
 defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
+defaults write com.apple.TextEdit PlainTextEncoding -int 4
+defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
+defaults write com.apple.TextEdit RichText -bool false
 defaults write com.apple.touchbar.agent PresentationModeGlobal -string functionKeys
-# defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
-# defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
-# defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
+sudo defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
+sudo defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
+sudo defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
+
 defaults write NSGlobalDomain AppleICUForce24HourTime -bool true
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
 defaults write NSGlobalDomain AppleLanguages -array 'en-US' 'es-US'
 defaults write NSGlobalDomain AppleMiniaturizeOnDoubleClick -bool false
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 defaults write NSGlobalDomain AppleShowScrollBars -string Always
 defaults write NSGlobalDomain AppleWindowTabbingMode -string always
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
@@ -114,18 +117,8 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 defaults write NSGlobalDomain QLPanelAnimationDuration -float 0
 
-/usr/libexec/PlistBuddy -c 'Set :DesktopViewSettings:IconViewSettings:arrangeBy name' ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c 'Set :DesktopViewSettings:IconViewSettings:gridOffsetX 0.0' ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c 'Set :DesktopViewSettings:IconViewSettings:gridOffsetY 32.0' ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c 'Set :DesktopViewSettings:IconViewSettings:gridSpacing 64' ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c 'Set :DesktopViewSettings:IconViewSettings:iconSize 48' ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c 'Set :DesktopViewSettings:IconViewSettings:labelOnBottom true' ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c 'Set :DesktopViewSettings:IconViewSettings:showIconPreview true' ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c 'Set :DesktopViewSettings:IconViewSettings:showItemInfo true' ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c 'Set :DesktopViewSettings:IconViewSettings:textSize 12' ~/Library/Preferences/com.apple.finder.plist
-
 for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
-  defaults write "${domain}" dontAutoLoad -array \
+  sudo defaults write "${domain}" dontAutoLoad -array \
     '/System/Library/CoreServices/Menu Extras/Battery.menu' \
     '/System/Library/CoreServices/Menu Extras/Bluetooth.menu' \
   	'/System/Library/CoreServices/Menu Extras/Clock.menu' \
@@ -135,5 +128,3 @@ for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
 done
 defaults write com.apple.systemuiserver menuExtras -array \
 	'/System/Library/CoreServices/Menu Extras/AirPort.menu'
-
-chflags nohidden ~/Library
