@@ -1,14 +1,41 @@
-default:	osx-preferences atom brew cleanmymac dropbox google-chrome istat-menus keychain whatsapp
+default:	atom brew cleanmymac dropbox google-chrome istat-menus keybase keychain osx-preferences
 
 1password:	brew /Applications/1Password\ 7.app/Contents/MacOS/1Password\ 7
 
 /Applications/1Password\ 7.app/Contents/MacOS/1Password\ 7:
-	brew cask install 1password
+	/usr/local/bin/brew cask install 1password
 
 atom:	brew /usr/local/bin/atom
 
 /usr/local/bin/atom:
-	brew cask install atom
+	/usr/local/bin/brew cask install atom
+
+atom-packages:	atom-haskell plist-converter pretty-json sort-lines teletype
+
+atom-haskell:	$(HOME)/.atom/packages/atom-haskell
+
+$(HOME)/.atom/packages/atom-haskell:	/usr/local/bin/apm
+	/usr/local/bin/apm install atom-haskell
+
+plist-converter:	$(HOME)/.atom/packages/plist-converter
+
+$(HOME)/.atom/packages/plist-converter:	/usr/local/bin/apm
+	/usr/local/bin/apm install plist-converter
+
+pretty-json:	$(HOME)/.atom/packages/pretty-json
+
+$(HOME)/.atom/packages/pretty-json:	/usr/local/bin/apm
+	/usr/local/bin/apm install pretty-json
+
+sort-lines:	$(HOME)/.atom/packages/sort-lines
+
+$(HOME)/.atom/packages/sort-lines:	/usr/local/bin/apm
+	/usr/local/bin/apm install sort-lines
+
+teletype:	$(HOME)/.atom/packages/teletype
+
+$(HOME)/.atom/packages/teletype:	/usr/local/bin/apm
+	/usr/local/bin/apm install teletype
 
 brew:	/usr/local/bin/brew
 
@@ -18,45 +45,50 @@ brew:	/usr/local/bin/brew
 cleanmymac:	brew /Applications/CleanMyMac\ X.app/Contents/MacOS/CleanMyMac\ X
 
 /Applications/CleanMyMac\ X.app/Contents/MacOS/CleanMyMac\ X:
-	brew cask install cleanmymac
+	/usr/local/bin/brew cask install cleanmymac
 
 dropbox:	brew /Applications/Dropbox.app/Contents/MacOS/Dropbox
 
 /Applications/Dropbox.app/Contents/MacOS/Dropbox:
-	brew cask install dropbox
+	/usr/local/bin/brew cask install dropbox
 
-google-chrome:	brew /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
+google-chrome:	brew /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome google-chrome-preferences
 
 /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome:
-	brew cask install google-chrome
+	/usr/local/bin/brew cask install google-chrome
+
+google-chrome-preferences:
+	preferences/google-chrome.sh
 
 istat-menus:	brew /Applications/iStat\ Menus.app/Contents/MacOS/iStat\ Menus
 
 /Applications/iStat\ Menus.app/Contents/MacOS/iStat\ Menus:
-	brew cask install istat-menus
+	/usr/local/bin/brew cask install istat-menus
+
+keybase:	brew /Applications/Keybase.app/Contents/MacOS/Keybase
+
+/Applications/Keybase.app/Contents/MacOS/Keybase:
+	/usr/local/bin/brew cask install keybase
 
 keychain:	brew /usr/local/bin/keychain
 
 /usr/local/bin/keychain:
-	brew install keychain
+	/usr/local/bin/brew install keychain
 
 osx-preferences:
-	defaults write -g AppleLanguages -array "en-US" "es-US"
-	defaults write -g AppleMiniaturizeOnDoubleClick -int 0;
-	defaults write -g AppleShowAllExtensions -int 1;
-	defaults write -g InitialKeyRepeat -int 1
-	defaults write -g KeyRepeat -int 1
-	defaults write -g NSUserDictionaryReplacementItems -array '{on=1;replace="(shrug)";with="\\U00af\\\\_(\\U30c4)_/\\U00af";}' '{on=1;replace=aapl;with="\\Uf8ff";}' '{on=1;replace=bb;with=bb;}' '{on=1;replace=jy;with="\\U56db";}' '{on=1;replace=omw;with="On my way";}' '{on=1;replace=shrug;with="\\U00af\\\\_(\\U30c4)_/\\U00af";}' '{on=1;replace=yf;with=yonatanfeldman;}'
-	defaults write -g NSUserKeyEquivalents '{"Hide Others"="@~h";}'
+	preferences/system.sh
+	preferences/safari.sh
+	preferences/terminal.sh
 
 vmware-fusion:	brew /Applications/VMware\ Fusion.app/Contents/MacOS/VMware\ Fusion
 
 /Applications/VMware\ Fusion.app/Contents/MacOS/VMware\ Fusion:
-	brew cask install vmware-fusion
+	/usr/local/bin/brew cask install vmware-fusion
 
 whatsapp:	brew /Applications/WhatsApp.app/Contents/MacOS/WhatsApp
 
 /Applications/WhatsApp.app/Contents/MacOS/WhatsApp:
-	brew cask install whatsapp
+	/usr/local/bin/brew cask install whatsapp
 
-.PHONY:	1password all atom brew cleanmymac dropbox google-chrome istat-menus keychain osx-preferences vmware-fusion whatsapp
+.PHONY:	1password all atom atom-packages brew cleanmymac dropbox google-chrome \
+	istat-menus keybase keychain osx-preferences vmware-fusion whatsapp
