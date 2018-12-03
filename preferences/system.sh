@@ -122,10 +122,10 @@ for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.* \
   sudo defaults write "${domain}" dontAutoLoad -array \
     '/System/Library/CoreServices/Menu Extras/Battery.menu' \
     '/System/Library/CoreServices/Menu Extras/Bluetooth.menu' \
-  	'/System/Library/CoreServices/Menu Extras/Clock.menu' \
-		'/System/Library/CoreServices/Menu Extras/TimeMachine.menu' \
+    '/System/Library/CoreServices/Menu Extras/Clock.menu' \
+    '/System/Library/CoreServices/Menu Extras/TimeMachine.menu' \
     '/System/Library/CoreServices/Menu Extras/User.menu' \
-		'/System/Library/CoreServices/Menu Extras/Volume.menu'
+    '/System/Library/CoreServices/Menu Extras/Volume.menu'
 done
 
 for domain in \
