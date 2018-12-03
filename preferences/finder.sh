@@ -51,6 +51,7 @@ done
 
 /usr/libexec/PlistBuddy \
   -c 'Set :DesktopViewSettings:GroupBy string none' \
+  -c "Set :DesktopViewSettings:IconViewSettings:labelOnBottom false" \
   ~/Library/Preferences/com.apple.finder.plist
 
 for vs in 'FK_StandardViewSettings' \
