@@ -5,6 +5,36 @@ osascript -e 'tell application "System Preferences" to quit'
 sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+defaults write NSGlobalDomain AppleICUForce24HourTime -bool true
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
+defaults write NSGlobalDomain AppleLanguages -array 'en-US' 'es-US'
+defaults write NSGlobalDomain AppleMiniaturizeOnDoubleClick -bool false
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+defaults write NSGlobalDomain AppleShowScrollBars -string Always
+defaults write NSGlobalDomain AppleWindowTabbingMode -string always
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.trackpad.forceClick -bool true
+defaults write NSGlobalDomain com.apple.trackpad.scaling -float 2.5
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool true
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
+defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
+defaults write NSGlobalDomain NSUserDictionaryReplacementItems -array '{on=1;replace="(shrug)";with="\\U00af\\\\_(\\U30c4)_/\\U00af";}' '{on=1;replace=aapl;with="\\Uf8ff";}' '{on=1;replace=bb;with=bb;}' '{on=1;replace=jy;with="\\U56db";}' '{on=1;replace=omw;with="On my way";}' '{on=1;replace=shrug;with="\\U00af\\\\_(\\U30c4)_/\\U00af";}' '{on=1;replace=yf;with=yonatanfeldman;}'
+defaults write NSGlobalDomain NSUserKeyEquivalents '{"Hide Others"="@~h";}'
+defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+defaults write NSGlobalDomain QLPanelAnimationDuration -float 0
+
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 defaults -currentHost write com.apple.screensaver idleTime -int 600
 defaults -currentHost write com.apple.screensaver showClock -bool true
@@ -86,36 +116,6 @@ defaults write com.apple.touchbar.agent PresentationModeGlobal -string functionK
 sudo defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
 sudo defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
 sudo defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
-
-defaults write NSGlobalDomain AppleICUForce24HourTime -bool true
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
-defaults write NSGlobalDomain AppleLanguages -array 'en-US' 'es-US'
-defaults write NSGlobalDomain AppleMiniaturizeOnDoubleClick -bool false
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-defaults write NSGlobalDomain AppleShowScrollBars -string Always
-defaults write NSGlobalDomain AppleWindowTabbingMode -string always
-defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults write NSGlobalDomain com.apple.trackpad.forceClick -bool true
-defaults write NSGlobalDomain com.apple.trackpad.scaling -float 2.5
-defaults write NSGlobalDomain InitialKeyRepeat -int 15
-defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
-defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool true
-defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
-defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
-defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
-defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
-defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
-defaults write NSGlobalDomain NSUserDictionaryReplacementItems -array '{on=1;replace="(shrug)";with="\\U00af\\\\_(\\U30c4)_/\\U00af";}' '{on=1;replace=aapl;with="\\Uf8ff";}' '{on=1;replace=bb;with=bb;}' '{on=1;replace=jy;with="\\U56db";}' '{on=1;replace=omw;with="On my way";}' '{on=1;replace=shrug;with="\\U00af\\\\_(\\U30c4)_/\\U00af";}' '{on=1;replace=yf;with=yonatanfeldman;}'
-defaults write NSGlobalDomain NSUserKeyEquivalents '{"Hide Others"="@~h";}'
-defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
-defaults write NSGlobalDomain QLPanelAnimationDuration -float 0
 
 for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.* \
 ; do
