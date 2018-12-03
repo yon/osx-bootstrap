@@ -117,7 +117,8 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 defaults write NSGlobalDomain QLPanelAnimationDuration -float 0
 
-for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
+for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.* \
+; do
   sudo defaults write "${domain}" dontAutoLoad -array \
     '/System/Library/CoreServices/Menu Extras/Battery.menu' \
     '/System/Library/CoreServices/Menu Extras/Bluetooth.menu' \
@@ -126,7 +127,25 @@ for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
     '/System/Library/CoreServices/Menu Extras/User.menu' \
 		'/System/Library/CoreServices/Menu Extras/Volume.menu'
 done
-defaults write com.apple.systemuiserver menuExtras -array \
-	'/System/Library/CoreServices/Menu Extras/AirPort.menu'
 
-killall 'Dock' &> /dev/null
+for domain in \
+  ~/Library/Preferences/com.apple.systemuiserver.plist \
+  com.apple.systemuiserver \
+; do
+  defaults write ${domain} 'NSStatusItem Visible Siri' -bool false
+  defaults write ${domain} 'NSStatusItem Visible com.apple.menuextra.airplay' -bool false
+  defaults write ${domain} 'NSStatusItem Visible com.apple.menuextra.airport' -bool true
+  defaults write ${domain} 'NSStatusItem Visible com.apple.menuextra.battery' -bool false
+  defaults write ${domain} 'NSStatusItem Visible com.apple.menuextra.clock' -bool false
+  defaults write ${domain} 'NSStatusItem Visible com.apple.menuextra.dwellcontrol' -bool false
+  defaults write ${domain} 'NSStatusItem Visible com.apple.menuextra.textinput' -bool false
+  defaults write ${domain} menuExtras -array '/System/Library/CoreServices/Menu Extras/AirPort.menu'
+done
+
+# for process in \
+#   'cfprefsd' \
+#   'Dock' \
+#   'SystemUIServer' \
+# ; do
+#   killall "${process}" &> /dev/null
+# done

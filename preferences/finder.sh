@@ -39,12 +39,12 @@ for vs in 'DesktopViewSettings' \
   'FK_StandardViewSettings' \
   'StandardViewSettings'; do
     /usr/libexec/PlistBuddy \
-      -c "Set :${vs}:IconViewSettings:arrangeBy string name" \
+      -c "Set :${vs}:IconViewSettings:arrangeBy name" \
       -c "Set :${vs}:IconViewSettings:gridSpacing 64" \
       -c "Set :${vs}:IconViewSettings:iconSize 48" \
-      -c "Set :${vs}:IconViewSettings:labelOnBottom bool true" \
-      -c "Set :${vs}:IconViewSettings:showIconPreview bool true" \
-      -c "Set :${vs}:IconViewSettings:showItemInfo bool true" \
+      -c "Set :${vs}:IconViewSettings:labelOnBottom true" \
+      -c "Set :${vs}:IconViewSettings:showIconPreview true" \
+      -c "Set :${vs}:IconViewSettings:showItemInfo true" \
       -c "Set :${vs}:IconViewSettings:textSize 12" \
       ~/Library/Preferences/com.apple.finder.plist
 done
@@ -56,41 +56,45 @@ done
 for vs in 'FK_StandardViewSettings' \
   'StandardViewSettings'; do
 
-    /usr/libexec/PlistBuddy \
-      -c "Set :${vs}:ListViewSettings:calculateAllSizes bool true" \
-      -c "Set :${vs}:ListViewSettings:sortColumn string name" \
-      -c "Set :${vs}:ListViewSettings:textSize 11" \
-      -c "Set :${vs}:ListViewSettings:useRelativeDates bool false" \
-      -c "Set :${vs}:ListViewSettings:viewOptionsVersion 1" \
-      ~/Library/Preferences/com.apple.finder.plist
+    for lvs in 'ListViewSettings'; do
 
-    (( i = 0 ))
+      /usr/libexec/PlistBuddy \
+        -c "Set :${vs}:${lvs}:calculateAllSizes true" \
+        -c "Set :${vs}:${lvs}:sortColumn name" \
+        -c "Set :${vs}:${lvs}:textSize 11" \
+        -c "Set :${vs}:${lvs}:useRelativeDates false" \
+        -c "Set :${vs}:${lvs}:viewOptionsVersion 1" \
+        ~/Library/Preferences/com.apple.finder.plist
 
-    for column in 'name' \
-      'dateModified' \
-      'size'; do
-        (( w = 300 / ( i + 1 ) ))
-        /usr/libexec/PlistBuddy \
-          -c "Set :${vs}:ListViewSettings:columns:${column}:ascending bool true" \
-          -c "Set :${vs}:ListViewSettings:columns:${column}:index ${i}" \
-          -c "Set :${vs}:ListViewSettings:columns:${column}:visible bool true" \
-          -c "Set :${vs}:ListViewSettings:columns:${column}:width ${w}" \
-          ~/Library/Preferences/com.apple.finder.plist
-      (( i++ ))
-    done
+      (( i = 0 ))
 
-    for column in 'comments' \
-      'dateCreated' \
-      'dateLastOpened' \
-      'kind' \
-      'label' \
-      'version'; do
-        /usr/libexec/PlistBuddy \
-          -c "Set :${vs}:ListViewSettings:columns:${column}:ascending bool true" \
-          -c "Set :${vs}:ListViewSettings:columns:${column}:index ${i}" \
-          -c "Set :${vs}:ListViewSettings:columns:${column}:visible bool false" \
-          ~/Library/Preferences/com.apple.finder.plist
-      (( i++ ))
+      for column in 'name' \
+        'dateModified' \
+        'size'; do
+          (( w = 300 / ( i + 1 ) ))
+          /usr/libexec/PlistBuddy \
+            -c "Set :${vs}:${lvs}:columns:${column}:ascending true" \
+            -c "Set :${vs}:${lvs}:columns:${column}:index ${i}" \
+            -c "Set :${vs}:${lvs}:columns:${column}:visible true" \
+            -c "Set :${vs}:${lvs}:columns:${column}:width ${w}" \
+            ~/Library/Preferences/com.apple.finder.plist
+          (( i++ ))
+      done
+
+      for column in 'comments' \
+        'dateCreated' \
+        'dateLastOpened' \
+        'kind' \
+        'label' \
+        'version'; do
+          /usr/libexec/PlistBuddy \
+            -c "Set :${vs}:${lvs}:columns:${column}:ascending true" \
+            -c "Set :${vs}:${lvs}:columns:${column}:index ${i}" \
+            -c "Set :${vs}:${lvs}:columns:${column}:visible false" \
+            ~/Library/Preferences/com.apple.finder.plist
+          (( i++ ))
+      done
+
     done
 
 done
@@ -98,5 +102,9 @@ done
 chflags nohidden ~/Library
 sudo chflags nohidden /Volumes
 
-killall 'Finder' &> /dev/null
-killall 'cfprefsd' &> /dev/null
+for process in \
+  'cfprefsd' \
+  'Finder' \
+; do
+  killall "${process}" &> /dev/null
+done
