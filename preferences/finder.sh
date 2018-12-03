@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
@@ -32,8 +34,6 @@ defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
 
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
-
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
 for vs in 'DesktopViewSettings' \
   'FK_StandardViewSettings' \
