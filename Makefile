@@ -81,7 +81,7 @@ google-chrome:	brew /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chro
 
 .PHONY:	google-chrome-preferences
 google-chrome-preferences:
-	$(notdir $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST))))))/../preferences/google-chrome.sh
+	curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/google-chrome.sh | bash
 
 .PHONY:	istat-menus
 istat-menus:	brew /Applications/iStat\ Menus.app/Contents/MacOS/iStat\ Menus
