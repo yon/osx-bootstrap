@@ -26,7 +26,7 @@ defaults write com.apple.terminal StringEncodings -array 4
   -c 'Delete :Window\ Settings:Basic:useOptionAsMetaKey' \
   ~/Library/Preferences/com.apple.terminal.plist
 
-tmpfile = `mktemp -t terminal.plist`
+tmpfile=`/usr/bin/mktemp -t terminal.plist`
 curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/terminal.plist > ${tmpfile}
 
 /usr/libexec/PlistBuddy \
