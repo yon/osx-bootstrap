@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+defaults write NSGlobalDomain com.apple.springing.delay -float 0.667
+defaults write NSGlobalDomain com.apple.springing.enabled -bool false
 
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
@@ -9,12 +11,13 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
 defaults write com.apple.finder AppleShowAllFiles -bool false
 defaults write com.apple.finder DisableAllAnimations -bool true
+defaults write com.apple.finder FinderSpawnTab -bool false
 defaults write com.apple.finder FXDefaultSearchScope -string 'SCcf'
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 defaults write com.apple.finder FXInfoPanesExpanded -dict General -bool true OpenWith -bool true
 defaults write com.apple.finder FXPreferredViewStyle -string 'Nlsv'
-defaults write com.apple.finder NewWindowTarget -string 'PfLo'
-defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
+defaults write com.apple.finder NewWindowTarget -string 'PfHm'
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}"
 defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 defaults write com.apple.finder QLEnableTextSelection -bool true
 defaults write com.apple.finder QuitMenuItem -bool true
@@ -46,66 +49,74 @@ for vs in 'DesktopViewSettings' \
       -c "Set :${vs}:IconViewSettings:showIconPreview true" \
       -c "Set :${vs}:IconViewSettings:showItemInfo true" \
       -c "Set :${vs}:IconViewSettings:textSize 12" \
-      ~/Library/Preferences/com.apple.finder.plist
+      ~/Library/Preferences/com.apple.finder.plist 2>/dev/null
 done
 
 /usr/libexec/PlistBuddy \
-  -c 'Set :DesktopViewSettings:GroupBy string none' \
   -c "Set :DesktopViewSettings:IconViewSettings:labelOnBottom false" \
-  ~/Library/Preferences/com.apple.finder.plist
+  ~/Library/Preferences/com.apple.finder.plist 2>/dev/null
 
-for vs in 'FK_StandardViewSettings' \
-  'StandardViewSettings'; do
+for vs in \
+  'FK_StandardViewSettings' \
+  'StandardViewSettings' \
+; do
 
-    for lvs in 'ListViewSettings'; do
+  for lvs in \
+    'ExtendedListViewSettingsV2' \
+    'ListViewSettings' \
+  ; do
+    /usr/libexec/PlistBuddy \
+      -c "Set :${vs}:${lvs}:calculateAllSizes 1" \
+      -c "Set :${vs}:${lvs}:sortColumn name" \
+      -c "Set :${vs}:${lvs}:textSize 12" \
+      -c "Set :${vs}:${lvs}:useRelativeDates 0" \
+      -c "Set :${vs}:${lvs}:viewOptionsVersion 1" \
+      ~/Library/Preferences/com.apple.finder.plist 2>/dev/null
+  done
 
+  declare -a column_ascending=(1 0 0 0 1 1 1 1 0)
+  declare -a column_identifier=(name dateModified dateCreated size kind label version comments dateLastOpened)
+  declare -a column_visible=(1 1 0 1 0 0 0 0 0)
+  declare -a column_width=(300 150 181 75 115 100 75 300 200)
+
+  # for lvs in \
+  #   'ExtendedListViewSettingsV2' \
+  # ; do
+  #   for i in ${!column_ascending[@]} \
+  #   ; do
+  #     /usr/libexec/PlistBuddy \
+  #       -c "Set :${vs}:${lvs}:columns:${column_identifier[${i}]}:ascending ${column_ascending[${i}]}" \
+  #       -c "Set :${vs}:${lvs}:columns:${column_identifier[${i}]}:index ${i}" \
+  #       -c "Set :${vs}:${lvs}:columns:${column_identifier[${i}]}:visible ${column_visible[${i}]}" \
+  #       -c "Set :${vs}:${lvs}:columns:${column_identifier[${i}]}:width ${column_width[${i}]}" \
+  #       ~/Library/Preferences/com.apple.finder.plist 2>/dev/null
+  #   done
+  # done
+
+  for lvs in \
+    'ListViewSettings' \
+  ; do
+    for i in ${!column_ascending[@]} \
+    ; do
       /usr/libexec/PlistBuddy \
-        -c "Set :${vs}:${lvs}:calculateAllSizes true" \
-        -c "Set :${vs}:${lvs}:sortColumn name" \
-        -c "Set :${vs}:${lvs}:textSize 11" \
-        -c "Set :${vs}:${lvs}:useRelativeDates false" \
-        -c "Set :${vs}:${lvs}:viewOptionsVersion 1" \
-        ~/Library/Preferences/com.apple.finder.plist
-
-      (( i = 0 ))
-
-      for column in 'name' \
-        'dateModified' \
-        'size'; do
-          (( w = 300 / ( i + 1 ) ))
-          /usr/libexec/PlistBuddy \
-            -c "Set :${vs}:${lvs}:columns:${column}:ascending true" \
-            -c "Set :${vs}:${lvs}:columns:${column}:index ${i}" \
-            -c "Set :${vs}:${lvs}:columns:${column}:visible true" \
-            -c "Set :${vs}:${lvs}:columns:${column}:width ${w}" \
-            ~/Library/Preferences/com.apple.finder.plist
-          (( i++ ))
-      done
-
-      for column in 'comments' \
-        'dateCreated' \
-        'dateLastOpened' \
-        'kind' \
-        'label' \
-        'version'; do
-          /usr/libexec/PlistBuddy \
-            -c "Set :${vs}:${lvs}:columns:${column}:ascending true" \
-            -c "Set :${vs}:${lvs}:columns:${column}:index ${i}" \
-            -c "Set :${vs}:${lvs}:columns:${column}:visible false" \
-            ~/Library/Preferences/com.apple.finder.plist
-          (( i++ ))
-      done
-
+        -c "Set :${vs}:${lvs}:columns:${column_identifier[${i}]}:ascending ${column_ascending[${i}]}" \
+        -c "Set :${vs}:${lvs}:columns:${column_identifier[${i}]}:index ${i}" \
+        -c "Set :${vs}:${lvs}:columns:${column_identifier[${i}]}:visible ${column_visible[${i}]}" \
+        -c "Set :${vs}:${lvs}:columns:${column_identifier[${i}]}:width ${column_width[${i}]}" \
+        ~/Library/Preferences/com.apple.finder.plist 2>/dev/null
     done
+  done
 
 done
 
 chflags nohidden ~/Library
-sudo chflags nohidden /Volumes
+# sudo chflags nohidden /Volumes
+
+pushd ~ 1>2 && /usr/bin/find . -name .DS_Store -delete 2>/dev/null; popd 1>2
 
 for process in \
   'cfprefsd' \
   'Finder' \
 ; do
-  killall "${process}" &> /dev/null
+  killall "${process}" &>/dev/null
 done
