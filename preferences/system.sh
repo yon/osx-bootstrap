@@ -5,12 +5,12 @@ osascript -e 'tell application "System Preferences" to quit'
 sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-read -p 'Enter your desired hostname: ' hostname
-sudo scutil --set ComputerName "${hostname}"
-sudo scutil --set HostName "${hostname}"
-sudo scutil --set LocalHostName "${hostname}"
-sudo systemsetup -setcomputername "${hostname}"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "${hostname}"
+# read -p 'Enter your desired hostname: ' hostname
+# sudo scutil --set ComputerName "${hostname}"
+# sudo scutil --set HostName "${hostname}"
+# sudo scutil --set LocalHostName "${hostname}"
+# sudo systemsetup -setcomputername "${hostname}"
+# sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "${hostname}"
 
 defaults write NSGlobalDomain AppleICUForce24HourTime -bool true
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
