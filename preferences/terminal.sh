@@ -31,3 +31,5 @@ curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preference
 /usr/libexec/PlistBuddy \
   -c "Merge /tmp/terminal.plist :Window\ Settings:Basic" \
   ~/Library/Preferences/com.apple.terminal.plist
+
+rm /tmp/terminal.plist
