@@ -1,5 +1,6 @@
 .PHONY:	default
 default: \
+	1password \
 	atom \
 	brew \
 	cleanmymac \
@@ -8,7 +9,10 @@ default: \
 	istat-menus \
 	keybase \
 	keychain \
-	osx-preferences
+	osx-preferences \
+	slack \
+	whatsapp \
+	zoomus
 
 .PHONY:	1password
 1password:	brew /Applications/1Password\ 7.app/Contents/MacOS/1Password\ 7
@@ -17,7 +21,7 @@ default: \
 	/usr/local/bin/brew cask install 1password
 
 .PHONY:	atom
-atom:	brew /usr/local/bin/atom
+atom:	brew /usr/local/bin/atom atom-packages
 
 /usr/local/bin/atom:
 	/usr/local/bin/brew cask install atom
@@ -108,6 +112,12 @@ osx-preferences:
 	curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/safari.sh | bash
 	curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/terminal.sh | bash
 
+.PHONY:	slack
+slack:	brew /Applications/Slack.app/Contents/MacOS/Slack
+
+/Applications/Slack.app/Contents/MacOS/Slack:
+	/usr/local/bin/brew cask install slack
+
 .PHONY:	vmware-fusion
 vmware-fusion:	brew /Applications/VMware\ Fusion.app/Contents/MacOS/VMware\ Fusion
 
@@ -119,3 +129,9 @@ whatsapp:	brew /Applications/WhatsApp.app/Contents/MacOS/WhatsApp
 
 /Applications/WhatsApp.app/Contents/MacOS/WhatsApp:
 	/usr/local/bin/brew cask install whatsapp
+
+.PHONY:	zoomus
+zoomus:	brew /Applications/zoom.us.app/Contents/MacOS/zoom.us
+
+/Applications/zoom.us.app/Contents/MacOS/zoom.us:
+	/usr/local/bin/brew cask install zoomus
