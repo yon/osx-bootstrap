@@ -26,6 +26,8 @@ defaults write com.apple.terminal StringEncodings -array 4
   -c 'Delete :Window\ Settings:Basic:useOptionAsMetaKey' \
   ~/Library/Preferences/com.apple.terminal.plist
 
+curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/terminal.plist > /tmp/terminal.plist
+
 /usr/libexec/PlistBuddy \
-  -c "Merge `dirname $0`/terminal.plist :Window\ Settings:Basic" \
+  -c "Merge /tmp/terminal.plist :Window\ Settings:Basic" \
   ~/Library/Preferences/com.apple.terminal.plist
