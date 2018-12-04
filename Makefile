@@ -16,7 +16,44 @@ default: \
 /Applications/1Password\ 7.app/Contents/MacOS/1Password\ 7:
 	/usr/local/bin/brew cask install 1password
 
-include includes/atom.mk
+.PHONY:	atom
+atom:	brew /usr/local/bin/atom
+
+/usr/local/bin/atom:
+	/usr/local/bin/brew cask install atom
+
+.PHONY:	atom-packages
+atom-packages:	atom-haskell plist-converter pretty-json sort-lines teletype
+
+.PHONY:	atom-haskell
+atom-haskell:	$(HOME)/.atom/packages/atom-haskell
+
+$(HOME)/.atom/packages/atom-haskell:	/usr/local/bin/apm
+	/usr/local/bin/apm install atom-haskell
+
+.PHONY:	plist-converter
+plist-converter:	$(HOME)/.atom/packages/plist-converter
+
+$(HOME)/.atom/packages/plist-converter:	/usr/local/bin/apm
+	/usr/local/bin/apm install plist-converter
+
+.PHONY:	pretty-json
+pretty-json:	$(HOME)/.atom/packages/pretty-json
+
+$(HOME)/.atom/packages/pretty-json:	/usr/local/bin/apm
+	/usr/local/bin/apm install pretty-json
+
+.PHONY:	sort-lines
+sort-lines:	$(HOME)/.atom/packages/sort-lines
+
+$(HOME)/.atom/packages/sort-lines:	/usr/local/bin/apm
+	/usr/local/bin/apm install sort-lines
+
+.PHONY:	teletype
+teletype:	$(HOME)/.atom/packages/teletype
+
+$(HOME)/.atom/packages/teletype:	/usr/local/bin/apm
+	/usr/local/bin/apm install teletype
 
 .PHONY:	brew
 brew:	/usr/local/bin/brew
@@ -36,7 +73,15 @@ dropbox:	brew /Applications/Dropbox.app/Contents/MacOS/Dropbox
 /Applications/Dropbox.app/Contents/MacOS/Dropbox:
 	/usr/local/bin/brew cask install dropbox
 
-include includes/google-chrome.mk
+.PHONY:	google-chrome
+google-chrome:	brew /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome google-chrome-preferences
+
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome:
+	/usr/local/bin/brew cask install google-chrome
+
+.PHONY:	google-chrome-preferences
+google-chrome-preferences:
+	$(notdir $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST))))))/../preferences/google-chrome.sh
 
 .PHONY:	istat-menus
 istat-menus:	brew /Applications/iStat\ Menus.app/Contents/MacOS/iStat\ Menus
@@ -58,10 +103,10 @@ keychain:	brew /usr/local/bin/keychain
 
 .PHONY: osx-preferences
 osx-preferences:
-	preferences/system.sh
-	preferences/finder.sh
-	preferences/safari.sh
-	preferences/terminal.sh
+	curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/system.sh | bash
+	curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/finder.sh | bash
+	curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/safari.sh | bash
+	curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/terminal.sh | bash
 
 .PHONY:	vmware-fusion
 vmware-fusion:	brew /Applications/VMware\ Fusion.app/Contents/MacOS/VMware\ Fusion
