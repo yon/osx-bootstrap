@@ -107,11 +107,6 @@ defaults write com.apple.print.PrintingPrefs 'Quit When Finished' -bool true
 defaults write com.apple.screencapture disable-shadow -bool true
 defaults write com.apple.screencapture type -string png
 defaults write com.apple.Siri StatusMenuVisible -bool false
-defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
-defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
-defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1
-defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
-defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 defaults write com.apple.speech.recognition.AppleSpeechRecognition.prefs DictationIMIntroMessagePresented -bool true
 defaults write com.apple.speech.recognition.AppleSpeechRecognition.prefs DictationIMMasterDictationEnabled -bool true
 defaults write com.apple.speech.recognition.AppleSpeechRecognition.prefs DictationIMPresentedOfflineUpgradeSuggestion -bool true
@@ -126,6 +121,12 @@ defaults write com.apple.touchbar.agent PresentationModeGlobal -string functionK
 sudo defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
 sudo defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
 sudo defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticCheckEnabled -bool true
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticallyInstallMacOSUpdates -bool true
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticCheckEnabled -bool true
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticDownload -bool true
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist ConfigDataInstall -bool true
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist CriticalUpdateInstall -bool true
 
 for process in \
   'cfprefsd' \
