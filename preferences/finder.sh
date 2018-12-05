@@ -56,6 +56,7 @@ done
   -c "Set :DesktopViewSettings:IconViewSettings:labelOnBottom false" \
   ~/Library/Preferences/com.apple.finder.plist 2>/dev/null
 
+  # 'SearchViewSettings' \
 for vs in \
   'FK_StandardViewSettings' \
   'StandardViewSettings' \
@@ -112,7 +113,7 @@ done
 chflags nohidden ~/Library
 # sudo chflags nohidden /Volumes
 
-pushd ~ 1>2 && /usr/bin/find . -name .DS_Store -delete 2>/dev/null; popd 1>2
+pushd ~ 1>/dev/null && /usr/bin/find . -name .DS_Store -delete 2>/dev/null; popd 1>/dev/null
 
 for process in \
   'cfprefsd' \
