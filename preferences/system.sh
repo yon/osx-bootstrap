@@ -128,6 +128,8 @@ sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist Automati
 sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist ConfigDataInstall -bool true
 sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist CriticalUpdateInstall -bool true
 
+sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
+
 for process in \
   'cfprefsd' \
   'Dock' \
