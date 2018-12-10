@@ -6,7 +6,7 @@
 # You must add Terminal to "System Preferences -> Security & Privacy -> Privacy -> Full Disk Access"
 #   still need to figure out how to do this programatically
 
-defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari 'NSWindow Frame BrowserWindowFrame' '0 0 1024 877 0 0 1440 877'
+defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari 'NSWindow Frame BrowserWindowFrame' '0 0 1280 1050 0 0 1680 1050'
 defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari AlwaysRestoreSessionAtLaunch -bool false
 defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari AlwaysShowTabBar -bool true
 defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari BlockStoragePolicy -int 2
