@@ -21,6 +21,7 @@ defaults write com.apple.terminal StringEncodings -array 4
   -c 'Delete :Window\ Settings:Basic:VisualBell' \
   -c 'Delete :Window\ Settings:Basic:WindowTitle' \
   -c 'Delete :Window\ Settings:Basic:columnCount' \
+  -c 'Delete :Window\ Settings:Basic:deleteSendsBackspace' \
   -c 'Delete :Window\ Settings:Basic:rowCount' \
   -c 'Delete :Window\ Settings:Basic:shellExitAction' \
   -c 'Delete :Window\ Settings:Basic:useOptionAsMetaKey' \

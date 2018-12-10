@@ -28,6 +28,8 @@
 	<string>Terminal</string>
 	<key>columnCount</key>
 	<integer>160</integer>
+	<key>deleteSendsBackspace</key>
+	<true/>
 	<key>rowCount</key>
 	<integer>58</integer>
 	<key>shellExitAction</key>
