@@ -10,6 +10,7 @@ default: \
 	keybase \
 	keychain \
 	osx-preferences \
+	vlc \
 	whatsapp
 
 .PHONY:	1password
@@ -109,6 +110,12 @@ osx-preferences:
 	curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/finder.sh | bash
 	curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/safari.sh | bash
 	curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/terminal.sh | bash
+
+.PHONY:	vlc
+whatsapp:	brew /Applications/VLC.app/Contents/MacOS/VLC
+
+/Applications/VLC.app/Contents/MacOS/VLC:
+	/usr/local/bin/brew cask install vlc
 
 .PHONY:	whatsapp
 whatsapp:	brew /Applications/WhatsApp.app/Contents/MacOS/WhatsApp
