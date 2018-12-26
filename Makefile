@@ -112,7 +112,7 @@ osx-preferences:
 	curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/terminal.sh | bash
 
 .PHONY:	vlc
-whatsapp:	brew /Applications/VLC.app/Contents/MacOS/VLC
+vlc:	brew /Applications/VLC.app/Contents/MacOS/VLC
 
 /Applications/VLC.app/Contents/MacOS/VLC:
 	/usr/local/bin/brew cask install vlc
