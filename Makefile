@@ -1,7 +1,6 @@
 .PHONY:	default
 default: \
 	1password \
-	atom \
 	brew \
 	cleanmymac \
 	dropbox \
@@ -10,7 +9,6 @@ default: \
 	keybase \
 	keychain \
 	osx-preferences \
-	vlc \
 	whatsapp
 
 .PHONY:	1password
