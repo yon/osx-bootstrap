@@ -9,4 +9,4 @@ if [ ! -f /Library/Developer/CommandLineTools/usr/bin/gnumake ]; then
 fi
 
 # Run osx-bootstrap Makefile; target default
-curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/Makefile | cat | make -f - default
+curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/Makefile | make -f - default
