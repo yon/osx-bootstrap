@@ -1,6 +1,7 @@
 .PHONY:	default
 default: \
 	brew \
+	brew-bundle \
 	osx-preferences
 
 .PHONY:	brew
