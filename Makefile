@@ -8,7 +8,7 @@ default: \
 brew:	/usr/local/bin/brew
 
 /usr/local/bin/brew:
-	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 .PHONY: brew-bundle
 brew-bundle:	brew
