@@ -5,14 +5,14 @@ default: \
 	osx-preferences
 
 .PHONY:	brew
-brew:	/usr/local/bin/brew
+brew:	/opt/homebrew/bin/brew
 
-/usr/local/bin/brew:
+/opt/homebrew/bin/brew:
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 .PHONY: brew-bundle
 brew-bundle:	brew
-	curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/Brewfile | /usr/local/bin/brew bundle install --file=-
+	curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/Brewfile | /opt/homebrew/bin/brew bundle install --file=-
 
 .PHONY: osx-preferences
 osx-preferences:
