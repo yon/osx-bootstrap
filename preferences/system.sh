@@ -107,6 +107,7 @@ defaults write com.apple.notificationcenterui bannerTime -float 2.5
 defaults write com.apple.preferences.extensions.ShareMenu displayOrder -array 'com.apple.share.System.add-to-safari-reading-list' 'com.apple.share.Messages.compose' 'com.apple.share.AirDrop.send' 'com.apple.share.Mail.compose' 'com.apple.share.Facebook.post' 'com.apple.share.Twitter.post'
 defaults write com.apple.print.PrintingPrefs 'Quit When Finished' -bool true
 defaults write com.apple.screencapture disable-shadow -bool true
+defaults write com.apple.screencapture location "~/Library/CloudStorage/GoogleDrive-yon@milliped.com/My Drive/Screenshots"
 defaults write com.apple.screencapture type -string png
 defaults write com.apple.Siri StatusMenuVisible -bool false
 defaults write com.apple.speech.recognition.AppleSpeechRecognition.prefs DictationIMIntroMessagePresented -bool true
