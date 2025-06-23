@@ -1,8 +1,7 @@
 .PHONY:	default
 default: \
 	brew \
-	brew-bundle \
-	osx-preferences
+	brew-bundle
 
 .PHONY:	brew
 brew:	/opt/homebrew/bin/brew
