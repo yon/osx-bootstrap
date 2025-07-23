@@ -12,9 +12,11 @@ brew:	/opt/homebrew/bin/brew
 .PHONY: brew-bundle
 brew-bundle:	brew
 	@if [ -f $(CURDIR)/Brewfile ]; then \
-		$(MAKE) brew-bundle-local; \
+		echo "Installing from local Brewfile..."; \
+		/opt/homebrew/bin/brew bundle install --file=$(CURDIR)/Brewfile; \
 	else \
-		$(MAKE) brew-bundle-remote; \
+		echo "Installing from remote Brewfile..."; \
+		curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/Brewfile | /opt/homebrew/bin/brew bundle install --file=-; \
 	fi
 
 .PHONY: brew-bundle-local
@@ -35,9 +37,21 @@ brew-bundle-dump:	brew
 osx-preferences:
 	@echo "Applying macOS preferences..."
 	@if [ -f $(CURDIR)/preferences/system.sh ]; then \
-		$(MAKE) osx-preferences-local; \
+		echo "Applying macOS preferences from local files..."; \
+		bash $(CURDIR)/preferences/system.sh; \
+		bash $(CURDIR)/preferences/finder.sh; \
+		bash $(CURDIR)/preferences/safari.sh; \
+		bash $(CURDIR)/preferences/terminal.sh; \
+		bash $(CURDIR)/preferences/rectangle.sh; \
+		echo "Local preferences applied successfully!"; \
 	else \
-		$(MAKE) osx-preferences-remote; \
+		echo "Applying macOS preferences from remote files..."; \
+		curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/system.sh | bash; \
+		curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/finder.sh | bash; \
+		curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/safari.sh | bash; \
+		curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/terminal.sh | bash; \
+		curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/rectangle.sh | bash; \
+		echo "Remote preferences applied successfully!"; \
 	fi
 	@echo "macOS preferences applied successfully!"
 
