@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-defaults write com.knollsoft.Rectangle gapSize -float 8
+# Rectangle window manager settings
+defaults write com.knollsoft.Rectangle gapSize -float 8                            # Set gap size between windows to 8 pixels
