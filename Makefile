@@ -1,7 +1,8 @@
 .PHONY:	default
 default: \
 	brew \
-	brew-bundle
+	brew-bundle \
+	dotfiles
 
 .PHONY:	brew
 brew:	/opt/homebrew/bin/brew
@@ -74,3 +75,9 @@ osx-preferences-remote:
 	@curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/terminal.sh | bash
 	@curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/rectangle.sh | bash
 	@echo "Remote preferences applied successfully!"
+
+.PHONY: dotfiles
+dotfiles:
+	@echo "Setting up dotfiles..."
+	@curl -fsSL https://raw.githubusercontent.com/yon/dotfiles/main/Makefile | make -f - default
+	@echo "Dotfiles setup complete!"
