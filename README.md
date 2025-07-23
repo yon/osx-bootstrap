@@ -29,14 +29,20 @@ If you prefer to run components individually:
 git clone https://github.com/yon/osx-bootstrap.git
 cd osx-bootstrap
 
-# Install Homebrew packages only
+# Install Homebrew packages (uses local Brewfile if available, remote otherwise)
 make brew-bundle
 
-# Apply macOS system preferences (optional)
+# Apply macOS system preferences (uses local scripts if available, remote otherwise)
 make osx-preferences
 
 # Update Brewfile with currently installed packages
 make brew-bundle-dump
+
+# Explicit control over local vs remote:
+make brew-bundle-local      # Force local Brewfile only
+make brew-bundle-remote     # Force remote Brewfile only
+make osx-preferences-local  # Force local preference scripts only
+make osx-preferences-remote # Force remote preference scripts only
 ```
 
 ## Included Applications
@@ -55,10 +61,7 @@ make brew-bundle-dump
 - **Creative**: Figma
 - **AI Tools**: ChatGPT, Claude
 - **Utilities**: Google Drive, iStat Menus
-
-### Mac App Store Apps
-- Home Assistant
-- Okta Verify
+- **Mac App Store Apps**: Home Assistant, Okta Verify, WireGuard
 
 ## System Preferences
 
@@ -93,9 +96,10 @@ make osx-preferences
 
 ## Troubleshooting
 
+### Homebrew & Package Installation
 - If Homebrew installation fails, install manually first
-- For permission issues, ensure Terminal has Full Disk Access
 - Run `brew doctor` if package installations fail
+- For permission issues, ensure Terminal has Full Disk Access
 
 ## Contributing
 
