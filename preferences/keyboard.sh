@@ -6,8 +6,11 @@ echo "Configuring keyboard settings..."
 # This means F1-F12 act as function keys by default, requiring Fn for brightness/volume
 # Your current setting: enabled (1)
 defaults write -g com.apple.keyboard.fnState -bool true
+defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
+# Also try the Apple HIToolbox domain which handles some keyboard settings
+defaults write com.apple.HIToolbox AppleFnUsageType -int 0
 
-echo "✓ Function keys set to standard mode (F1-F12 without Fn key)"
+echo "✓ Function keys set to standard mode (F1-F12 direct access)"
 
 # Key repeat settings - Very fast repeat with short delay
 # Your current settings: KeyRepeat=1 (very fast), InitialKeyRepeat=15 (short delay)
@@ -50,9 +53,11 @@ echo
 echo "Keyboard configuration complete!"
 echo
 echo "Settings applied:"
-echo "• Function keys work as F1-F12 without Fn (for brightness, use Fn+F1/F2)"
+echo "• Function keys set to standard F1-F12 mode (brightness = direct F1/F2)"
 echo "• Very fast key repeat with short delay"
 echo "• Minimal text auto-corrections"
 echo "• Press-and-hold disabled (enables key repeat)"
 echo
-echo "Note: Some changes may require logging out and back in to take full effect"
+echo "⚠️  IMPORTANT: Function key changes require a RESTART to take effect"
+echo "   After restart: F1/F2 = brightness, F10/F11/F12 = volume (no Fn needed)"
+echo "   For traditional F1/F2 function keys, use Fn+F1/F2"
