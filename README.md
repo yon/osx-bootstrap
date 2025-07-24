@@ -37,12 +37,6 @@ make osx-preferences
 
 # Update Brewfile with currently installed packages
 make brew-bundle-dump
-
-# Explicit control over local vs remote:
-make brew-bundle-local      # Force local Brewfile only
-make brew-bundle-remote     # Force remote Brewfile only
-make osx-preferences-local  # Force local preference scripts only
-make osx-preferences-remote # Force remote preference scripts only
 ```
 
 ## Included Applications

@@ -111,24 +111,6 @@ defaults write com.apple.controlstrip MiniCustomized -array com.apple.system.bri
 # Crash reporter settings
 defaults write com.apple.CrashReporter UseUNC 1                                    # Use UNC paths for crash reports
 
-# Dock settings
-defaults write com.apple.dock autohide-delay -float 0                              # Remove dock auto-hide delay
-defaults write com.apple.dock checked-for-launchpad -bool true                     # Skip Launchpad setup
-defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true   # Enable spring loading for all Dock items
-defaults write com.apple.dock expose-animation-duration -float 0.1                 # Speed up Mission Control animations
-defaults write com.apple.dock largesize -int 72                                    # Set large size for magnified dock items
-defaults write com.apple.dock launchanim -bool false                               # Disable opening application animation
-defaults write com.apple.dock magnification -bool true                             # Enable dock magnification
-defaults write com.apple.dock minimize-to-application -bool true                   # Minimize windows into the application icon
-defaults write com.apple.dock mouse-over-hilite-stack -bool true                   # Enable highlight hover effect for stacks
-defaults write com.apple.dock show-process-indicators -bool true                   # Show indicator lights for open applications
-defaults write com.apple.dock show-recents -bool false                             # Don't show recent applications in dock
-defaults write com.apple.dock showhidden -bool true                                # Make Dock icons of hidden applications translucent
-defaults write com.apple.dock showLaunchpadGestureEnabled -int 0                   # Disable Launchpad gesture
-defaults write com.apple.dock single-app -bool true                                # Enable single app mode (hide other apps when switching)
-defaults write com.apple.dock size-immutable -bool true                            # Make dock size immutable
-defaults write com.apple.dock tilesize -int 64                                     # Set dock tile size to 64 pixels
-
 # External trackpad settings (for Magic Trackpad)
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true  # Enable tap to click on external trackpad
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -bool false  # Disable dragging on external trackpad
@@ -215,7 +197,6 @@ sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist Critical
 
 for process in \
   'cfprefsd' \
-  'Dock' \
   'SystemUIServer' \
 ; do
   killall "${process}" &> /dev/null
