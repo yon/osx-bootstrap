@@ -34,6 +34,7 @@ osx-preferences:
 		bash $(CURDIR)/preferences/dock.sh; \
 		bash $(CURDIR)/preferences/safari.sh; \
 		bash $(CURDIR)/preferences/terminal.sh; \
+		bash $(CURDIR)/preferences/istat-menus.sh; \
 		bash $(CURDIR)/preferences/rectangle.sh; \
 		echo "Local preferences applied successfully!"; \
 	else \
@@ -43,6 +44,7 @@ osx-preferences:
 		curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/dock.sh | bash; \
 		curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/safari.sh | bash; \
 		curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/terminal.sh | bash; \
+		curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/istat-menus.sh | bash; \
 		curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/rectangle.sh | bash; \
 		echo "Remote preferences applied successfully!"; \
 	fi
