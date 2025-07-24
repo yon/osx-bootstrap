@@ -30,40 +30,23 @@ import_istat_settings() {
     fi
 }
 
-# Try licensed version first (from personalized GitHub Actions branch)
-LICENSED_SETTINGS="$(dirname "$0")/istat-menus-settings-licensed.ismp"
-SANITIZED_SETTINGS="$(dirname "$0")/istat-menus-settings.ismp"
+SETTINGS_FILE="$(dirname "$0")/istat-menus-settings.ismp"
 
-if [ -f "$LICENSED_SETTINGS" ]; then
-    # Licensed version found (likely from personalized branch)
-    import_istat_settings "$LICENSED_SETTINGS" "true"
-elif [ -f "$SANITIZED_SETTINGS" ]; then
-    # Sanitized version found (main branch)
-    import_istat_settings "$SANITIZED_SETTINGS" "false"
+if [ -f "$SETTINGS_FILE" ]; then
+    # Local settings file found
+    import_istat_settings "$SETTINGS_FILE" "false"
 else
-    # No local files found, try remote download
+    # No local file found, try remote download
     echo "Local iStat Menus settings not found, trying remote..."
-
-    # First try to get licensed version (from personalized branch if available)
-    TEMP_LICENSED="/tmp/istat-menus-settings-licensed.ismp"
-    TEMP_SANITIZED="/tmp/istat-menus-settings.ismp"
-
-    # Try licensed version first (this will fail if no personalized branch exists)
-    if curl -fsSL "https://raw.githubusercontent.com/yon/osx-bootstrap/personalized-$(date +%Y%m%d)/preferences/istat-menus-settings-licensed.ismp" -o "$TEMP_LICENSED" 2>/dev/null; then
-        echo "Found personalized settings with license"
-        if import_istat_settings "$TEMP_LICENSED" "true"; then
-            rm "$TEMP_LICENSED"
+    
+    TEMP_SETTINGS="/tmp/istat-menus-settings.ismp"
+    
+    if curl -fsSL "https://raw.githubusercontent.com/yon/osx-bootstrap/main/preferences/istat-menus-settings.ismp" -o "$TEMP_SETTINGS"; then
+        echo "Downloaded iStat Menus settings from main branch"
+        if import_istat_settings "$TEMP_SETTINGS" "false"; then
+            rm "$TEMP_SETTINGS"
         else
-            rm "$TEMP_LICENSED"
-            exit 1
-        fi
-    # Fall back to sanitized version from main branch
-    elif curl -fsSL "https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/istat-menus-settings.ismp" -o "$TEMP_SANITIZED"; then
-        echo "Downloaded sanitized iStat Menus settings from main branch"
-        if import_istat_settings "$TEMP_SANITIZED" "false"; then
-            rm "$TEMP_SANITIZED"
-        else
-            rm "$TEMP_SANITIZED"
+            rm "$TEMP_SETTINGS"
             exit 1
         fi
     else
@@ -71,10 +54,10 @@ else
         echo "iStat Menus will use default settings"
         echo ""
         echo "To configure iStat Menus with your custom settings:"
-        echo "1. Generate a personalized bootstrap using GitHub Actions"
-        echo "2. Or export your settings from iStat Menus (File > Export Settings)"
-        echo "3. Save as 'istat-menus-settings.ismp' in the preferences directory"
-        echo "4. Re-run the bootstrap process"
+        echo "1. Export your settings from iStat Menus (File > Export Settings)"
+        echo "2. Save as 'istat-menus-settings.ismp' in the preferences directory"
+        echo "3. Re-run the bootstrap process"
+        echo "4. Or add your license manually via the iStat Menus preferences UI"
     fi
 fi
 
