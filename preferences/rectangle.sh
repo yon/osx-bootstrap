@@ -3,8 +3,8 @@
 echo "Configuring Rectangle window manager..."
 
 # Check if Rectangle config file exists and import it
-if [ -f "$(dirname "$0")/rectangle.json" ]; then
-    echo "Importing Rectangle configuration from rectangle.json..."
+if [ -f "$(dirname "$0")/rectangle-settings.json" ]; then
+    echo "Importing Rectangle configuration from rectangle-settings.json..."
 
     # Kill Rectangle if it's running to ensure clean import
     killall Rectangle 2>/dev/null || true
@@ -12,7 +12,7 @@ if [ -f "$(dirname "$0")/rectangle.json" ]; then
     # Import the configuration by parsing the JSON and applying settings
     if command -v python3 >/dev/null 2>&1; then
         # Validate JSON with python first
-        if python3 -m json.tool "$(dirname "$0")/rectangle.json" >/dev/null 2>&1; then
+        if python3 -m json.tool "$(dirname "$0")/rectangle-settings.json" >/dev/null 2>&1; then
             echo "Configuration file is valid JSON"
 
             # Parse and apply Rectangle settings using python
@@ -23,7 +23,7 @@ import subprocess
 import sys
 
 try:
-    with open("$(dirname "$0")/rectangle.json", 'r') as f:
+    with open("$(dirname "$0")/rectangle-settings.json", 'r') as f:
         config = json.load(f)
 
     # Apply defaults
@@ -43,7 +43,7 @@ except Exception as e:
     sys.exit(1)
 EOF
         else
-            echo "Error: rectangle.json is not valid JSON"
+            echo "Error: rectangle-settings.json is not valid JSON"
             exit 1
         fi
     else
@@ -51,7 +51,7 @@ EOF
         exit 1
     fi
 else
-    echo "rectangle.json not found, applying basic settings..."
+    echo "rectangle-settings.json not found, applying basic settings..."
     # Fallback to basic settings if config file is missing
     defaults write com.knollsoft.Rectangle gapSize -float 4                            # Set gap size between windows to 4 pixels
 fi
