@@ -9,7 +9,7 @@ defaults write com.apple.dock persistent-apps -array
 dock_add_app() {
     local app_name="$1"
     local app_path=""
-    
+
     # Check common locations for apps
     if [ -d "/Applications/${app_name}.app" ]; then
         app_path="/Applications/${app_name}.app"
@@ -20,7 +20,7 @@ dock_add_app() {
     elif [ -d "/System/Applications/Utilities/${app_name}.app" ]; then
         app_path="/System/Applications/Utilities/${app_name}.app"
     fi
-    
+
     if [ -n "$app_path" ]; then
         defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>$app_path</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
         echo "Added $app_name to dock"
@@ -52,7 +52,7 @@ dock_add_folder() {
     local display_as="$2"  # 0=folder, 1=stack
     local show_as="$3"     # 0=automatic, 1=fan, 2=grid, 3=list
     local sort_by="$4"     # 1=name, 2=date added, 3=date modified, 4=date created, 5=kind
-    
+
     if [ -d "$folder_path" ]; then
         defaults write com.apple.dock persistent-others -array-add "<dict>
             <key>tile-data</key>
@@ -84,7 +84,7 @@ dock_add_folder() {
 defaults write com.apple.dock persistent-others -array
 
 # Add your dock folders (right side) - based on current settings
-dock_add_folder "/Applications" 0 0 1                    # Applications as folder, automatic view, sort by name  
+dock_add_folder "/Applications" 0 0 1                    # Applications as folder, automatic view, sort by name
 dock_add_folder "$HOME/Downloads" 0 0 1                  # Downloads as folder (no arrangement/showas in plist, defaults)
 
 # Note: Trash is special and added automatically by macOS

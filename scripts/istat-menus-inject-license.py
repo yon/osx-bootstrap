@@ -21,18 +21,18 @@ def validate_file(file_path, should_exist=True):
     if should_exist and not os.path.exists(file_path):
         print(f"Error: Input file '{file_path}' does not exist", file=sys.stderr)
         return False
-    
+
     if should_exist and not os.access(file_path, os.R_OK):
         print(f"Error: Cannot read input file '{file_path}'", file=sys.stderr)
         return False
-    
+
     return True
 
 
 def inject_license(input_file, output_file, email, serial, build_version="1240"):
     """
     Inject license information into an iStat Menus settings file.
-    
+
     Args:
         input_file (str): Path to sanitized .ismp file
         output_file (str): Path for output .ismp file with license
@@ -44,31 +44,31 @@ def inject_license(input_file, output_file, email, serial, build_version="1240")
         # Read the sanitized plist file
         with open(input_file, 'rb') as f:
             plist_data = plistlib.load(f)
-        
+
         print(f"Loaded settings from: {input_file}")
-        
+
         # Inject license information
         plist_data['license'] = {
             'email': email,
             'serial': serial
         }
-        
+
         # Ensure build version is set
         if 'build' not in plist_data:
             plist_data['build'] = build_version
-        
+
         # Create output directory if it doesn't exist
         os.makedirs(os.path.dirname(output_file), exist_ok=True)
-        
+
         # Write the licensed plist file
         with open(output_file, 'wb') as f:
             plistlib.dump(plist_data, f)
-        
+
         print(f"Licensed settings written to: {output_file}")
         print(f"License injected for: {email}")
-        
+
         return True
-        
+
     except plistlib.InvalidFileException:
         print(f"Error: '{input_file}' is not a valid plist file", file=sys.stderr)
         return False
@@ -90,64 +90,64 @@ Examples:
     --serial "GAWQE-FB7NG-YX5VA-8FJ72-WQ6QZ-PNVWR-M8P6R-GLN9C-CUA9F-QZRPL-9PX4H-ENL4G-69HDZ-5FK3D-B5NG7-A"
         """
     )
-    
-    parser.add_argument('--input', '-i', 
+
+    parser.add_argument('--input', '-i',
                        required=True,
                        help='Input .ismp file (sanitized, without license)')
-    
+
     parser.add_argument('--output', '-o',
-                       required=True, 
+                       required=True,
                        help='Output .ismp file (with license injected)')
-    
+
     parser.add_argument('--email', '-e',
                        required=True,
                        help='License email address')
-    
+
     parser.add_argument('--serial', '-s',
                        required=True,
                        help='License serial number')
-    
+
     parser.add_argument('--build', '-b',
                        default="1240",
                        help='Build version (default: 1240)')
-    
+
     parser.add_argument('--verbose', '-v',
                        action='store_true',
                        help='Enable verbose output')
-    
+
     args = parser.parse_args()
-    
+
     # Validate inputs
     if not validate_file(args.input, should_exist=True):
         sys.exit(1)
-    
+
     if not args.email or '@' not in args.email:
         print("Error: Please provide a valid email address", file=sys.stderr)
         sys.exit(1)
-    
+
     if not args.serial or len(args.serial) < 10:
         print("Error: Please provide a valid serial number", file=sys.stderr)
         sys.exit(1)
-    
+
     if args.verbose:
         print(f"Input file: {args.input}")
         print(f"Output file: {args.output}")
         print(f"License email: {args.email}")
         print(f"Serial length: {len(args.serial)} characters")
         print(f"Build version: {args.build}")
-    
+
     # Inject license
     success = inject_license(
         args.input,
-        args.output, 
+        args.output,
         args.email,
         args.serial,
         args.build
     )
-    
+
     if not success:
         sys.exit(1)
-    
+
     print("License injection completed successfully!")
 
 

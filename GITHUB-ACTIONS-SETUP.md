@@ -15,7 +15,7 @@ Add the following secrets to your GitHub repository:
    - **Name:** `ISTAT_MENUS_LICENSE_EMAIL`
    - **Value:** Your iStat Menus license email
 
-   - **Name:** `ISTAT_MENUS_LICENSE_SERIAL`  
+   - **Name:** `ISTAT_MENUS_LICENSE_SERIAL`
    - **Value:** Your iStat Menus license serial number
 
 ### 2. Generate Personalized Bootstrap

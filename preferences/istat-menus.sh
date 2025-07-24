@@ -6,21 +6,21 @@ echo "Configuring iStat Menus..."
 import_istat_settings() {
     local settings_file="$1"
     local has_license="$2"
-    
+
     echo "Importing iStat Menus configuration from $(basename "$settings_file")..."
-    
+
     # Use the 'open' command to import the settings
     if open "$settings_file"; then
         echo "iStat Menus settings file opened successfully!"
         echo "iStat Menus should now import the settings automatically."
-        
+
         if [ "$has_license" = "true" ]; then
             echo "✓ License information included - you're all set!"
         else
             echo "ℹ️  Note: License information not included"
             echo "   You can add your license manually in iStat Menus preferences"
         fi
-        
+
         echo "You may see an import dialog - please confirm the import when prompted."
         return 0
     else
@@ -43,11 +43,11 @@ elif [ -f "$SANITIZED_SETTINGS" ]; then
 else
     # No local files found, try remote download
     echo "Local iStat Menus settings not found, trying remote..."
-    
+
     # First try to get licensed version (from personalized branch if available)
     TEMP_LICENSED="/tmp/istat-menus-settings-licensed.ismp"
     TEMP_SANITIZED="/tmp/istat-menus-settings.ismp"
-    
+
     # Try licensed version first (this will fail if no personalized branch exists)
     if curl -fsSL "https://raw.githubusercontent.com/yon/osx-bootstrap/personalized-$(date +%Y%m%d)/preferences/istat-menus-settings-licensed.ismp" -o "$TEMP_LICENSED" 2>/dev/null; then
         echo "Found personalized settings with license"
