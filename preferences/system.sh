@@ -8,36 +8,24 @@ osascript -e 'tell application "System Settings" to quit' 2>/dev/null || true
 sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-# Hostname configuration (commented out - uncomment and customize as needed)
-
-# read -p 'Enter your desired hostname: ' hostname
-# sudo scutil --set ComputerName "${hostname}"                                     # Set computer name as it appears in Finder sidebar
-# sudo scutil --set HostName "${hostname}"                                         # Set hostname for network identification
-# sudo scutil --set LocalHostName "${hostname}"                                    # Set local hostname for Bonjour
-# sudo systemsetup -setcomputername "${hostname}"                                  # Set computer name in System Settings
-# sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "${hostname}"  # Set SMB/CIFS name
+# Hostname configuration
+read -p 'Enter your desired hostname: ' hostname
+sudo scutil --set ComputerName "${hostname}"                                     # Set computer name as it appears in Finder sidebar
+sudo scutil --set HostName "${hostname}"                                         # Set hostname for network identification
+sudo scutil --set LocalHostName "${hostname}"                                    # Set local hostname for Bonjour
+sudo systemsetup -setcomputername "${hostname}"                                  # Set computer name in System Settings
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "${hostname}"  # Set SMB/CIFS name
 
 # Time & Language
 defaults write NSGlobalDomain AppleICUForce24HourTime -bool true                   # Use 24-hour time format
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 2                           # Enable full keyboard access for all controls
 defaults write NSGlobalDomain AppleLanguages -array 'en-US' 'es-US'                # Set preferred languages
 defaults write NSGlobalDomain AppleMiniaturizeOnDoubleClick -bool false            # Disable minimize on double-click
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false                 # Disable press-and-hold for keys in favor of key repeat
 defaults write NSGlobalDomain AppleShowScrollBars -string Always                   # Always show scroll bars
 defaults write NSGlobalDomain AppleWindowTabbingMode -string always                # Always prefer tabs when opening documents
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1                   # Enable tap to click for trackpad
 defaults write NSGlobalDomain com.apple.trackpad.forceClick -bool true             # Enable force click and haptic feedback
 defaults write NSGlobalDomain com.apple.trackpad.scaling -float 2.5                # Set trackpad tracking speed
-
-# Keyboard repeat settings
-defaults write NSGlobalDomain InitialKeyRepeat -int 15                             # Set initial key repeat delay (15 = 225ms)
-defaults write NSGlobalDomain KeyRepeat -int 1                                     # Set key repeat rate (1 = 15ms)
-
-# Text input and substitution settings
-defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false         # Disable automatic capitalization
-defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false       # Disable smart dashes
-defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool true      # Enable automatic period substitution
-defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false      # Disable smart quotes
 
 # Window and document behavior
 defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false       # Disable window animations for speed
@@ -78,9 +66,6 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 0                    
 defaults write com.apple.ActivityMonitor SortColumn -string 'CPUUsage'             # Sort Activity Monitor results by CPU usage
 defaults write com.apple.ActivityMonitor SortDirection -int 0                      # Sort direction (0 = descending, 1 = ascending)
 
-# Contacts app debug menu (Note: May fail on newer macOS versions due to sandboxing)
-# defaults write com.apple.addressbook ABShowDebugMenu -bool true                  # Enable debug menu in Contacts app (may not work in modern macOS)
-
 # Trackpad settings
 defaults write com.apple.AppleMultitouchTrackpad ActuateDetents -bool true         # Enable trackpad haptic feedback
 defaults write com.apple.AppleMultitouchTrackpad ActuationStrength -int 0          # Set trackpad click feedback strength (0 = light, 1 = medium, 2 = firm)
@@ -95,11 +80,6 @@ defaults write com.apple.appstore WebKitDeveloperExtras -bool true              
 
 # Siri and dictation
 defaults write com.apple.assistant.support 'Dictation Enabled' -bool true          # Enable dictation
-
-# Screen brightness controls (Note: BezelServices may be deprecated)
-# defaults write com.apple.BezelServices dAuto -bool false                         # Disable automatic brightness adjustment
-# defaults write com.apple.BezelServices kDim -bool true                           # Enable screen dimming
-# defaults write com.apple.BezelServices kDimTime -int 300                         # Set screen dim time to 5 minutes
 
 # App Store auto-updates
 defaults write com.apple.commerce AutoUpdate -bool true                            # Enable automatic app updates
@@ -124,13 +104,6 @@ defaults write com.apple.helpviewer DevMode -bool true                          
 
 # Image Capture settings
 defaults write com.apple.ImageCapture disableHotPlug -bool true                    # Prevent Image Capture from opening when devices are plugged in
-
-# iTunes/Music app settings (Note: iTunes preferences may not apply to Music app)
-# defaults write com.apple.iTunes disablePing -bool true                           # Disable iTunes Ping (deprecated service)
-# defaults write com.apple.iTunes disablePingSidebar -bool true                    # Disable iTunes Ping sidebar (deprecated service)
-
-# Security and quarantine settings (SECURITY RISK: Consider carefully before disabling)
-# defaults write com.apple.LaunchServices LSQuarantine -bool false                 # Disable quarantine for downloaded applications (NOT RECOMMENDED)
 
 # Login window settings
 defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false   # Don't reopen apps after login
@@ -169,9 +142,6 @@ defaults write com.apple.speech.recognition.AppleSpeechRecognition.prefs Dictati
 # System Preferences/Settings app
 defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false    # Don't restore System Preferences windows on reopening
 
-# Menu bar extras (Note: Some paths may be outdated in newer macOS versions)
-# defaults write com.apple.systemuiserver menuExtras -array '/System/Library/CoreServices/Menu Extras/AirPort.menu'  # Add Wi-Fi menu to menu bar
-
 # TextEdit preferences
 defaults write com.apple.TextEdit PlainTextEncoding -int 4                         # Use UTF-8 encoding for reading plain text
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4                 # Use UTF-8 encoding for writing plain text
@@ -191,9 +161,6 @@ sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist Automati
 sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticDownload -bool true  # Automatically download updates
 sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist ConfigDataInstall -bool true  # Automatically install system data files and security updates
 sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist CriticalUpdateInstall -bool true  # Automatically install critical security updates
-
-# Enable locate database (Note: This service may not exist in newer macOS versions)
-# sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist      # Enable locate database for fast file searching
 
 for process in \
   'cfprefsd' \
