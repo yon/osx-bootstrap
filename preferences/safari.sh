@@ -25,6 +25,7 @@ defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/co
 
 # Safari behavior settings
 defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari DownloadsClearingPolicy -int 2  # Clear downloads list policy
+defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari DownloadsPath "/Users/yon/yon@milliped.com - Google Drive/My Drive/Downloads"  # Set custom downloads folder
 defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false  # Find matches anywhere in words, not just at start
 # defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari HomePage -string 'about:blank'  # Set homepage (customize as needed)
 defaults write ~/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari HomePage -string 'https://mail.milliped.com'  # Custom homepage (update for your use)

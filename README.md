@@ -63,7 +63,8 @@ The script optionally configures macOS system preferences including:
 
 - **Dock**: Auto-hide, magnification, show indicators
 - **Finder**: Show extensions, path bar, status bar
-- **Safari**: Developer tools, privacy settings
+- **Safari**: Developer tools, privacy settings, custom download folder
+- **Chrome**: Custom download folder, disable print preview
 - **System**: Keyboard repeat rates, trackpad settings
 - **Terminal**: Custom profile and settings
 - **Rectangle**: Window management gap settings
