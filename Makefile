@@ -24,6 +24,10 @@ brew-bundle:	brew
 brew-bundle-dump:	brew
 	@/opt/homebrew/bin/brew bundle dump --file=$(CURDIR)/Brewfile --force
 
+.PHONY: brew-upgrade
+brew-upgrade:	brew
+	@brew update --force && brew list | xargs brew upgrade --force && brew cleanup
+
 .PHONY: osx-preferences
 osx-preferences:
 	@echo "Applying macOS preferences..."
