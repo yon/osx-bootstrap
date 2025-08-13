@@ -1,8 +1,5 @@
 .PHONY:	default
-default: \
-	brew \
-	brew-bundle \
-	dotfiles
+default: help
 
 .PHONY:	brew
 brew:	/opt/homebrew/bin/brew
@@ -27,6 +24,24 @@ brew-bundle-dump:	brew
 .PHONY: brew-upgrade
 brew-upgrade:	brew
 	@brew update --force && brew list | xargs brew upgrade --force && brew cleanup
+
+.PHONY: dotfiles
+dotfiles:
+	@echo "Setting up dotfiles..."
+	@curl -fsSL https://raw.githubusercontent.com/yon/dotfiles/main/Makefile | make -f - default
+	@echo "Dotfiles setup complete!"
+
+.PHONY: help
+help:
+	@echo "Available targets:"
+	@echo "  default          - Help"
+	@echo "  brew             - Install Homebrew"
+	@echo "  brew-bundle      - Install packages from Brewfile"
+	@echo "  brew-bundle-dump - Export installed packages to Brewfile"
+	@echo "  brew-upgrade     - Update and upgrade all packages"
+	@echo "  dotfiles         - Setup dotfiles"
+	@echo "  help             - Show this help message"
+	@echo "  osx-preferences  - Apply macOS system preferences"
 
 .PHONY: osx-preferences
 osx-preferences:
@@ -59,9 +74,3 @@ osx-preferences:
 		echo "Remote preferences applied successfully!"; \
 	fi
 	@echo "macOS preferences applied successfully!"
-
-.PHONY: dotfiles
-dotfiles:
-	@echo "Setting up dotfiles..."
-	@curl -fsSL https://raw.githubusercontent.com/yon/dotfiles/main/Makefile | make -f - default
-	@echo "Dotfiles setup complete!"
