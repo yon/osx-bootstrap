@@ -1,6 +1,9 @@
 .PHONY:	default
 default: help
 
+.PHONY: bootstrap
+bootstrap:	brew-bundle osx-preferences dotfiles
+
 .PHONY:	brew
 brew:	/opt/homebrew/bin/brew
 
@@ -35,6 +38,7 @@ dotfiles:
 help:
 	@echo "Available targets:"
 	@echo "  default          - Help"
+	@echo "  bootstrap        - Perform OSX Bootstrap"
 	@echo "  brew             - Install Homebrew"
 	@echo "  brew-bundle      - Install packages from Brewfile"
 	@echo "  brew-bundle-dump - Export installed packages to Brewfile"
