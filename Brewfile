@@ -76,6 +76,8 @@ mas "WireGuard", id: 1451685025
 vscode "anthropic.claude-code"
 vscode "anysphere.cursorpyright"
 vscode "anysphere.remote-ssh"
+vscode "ms-azuretools.vscode-containers"
+vscode "ms-azuretools.vscode-docker"
 vscode "ms-python.debugpy"
 vscode "ms-python.python"
 vscode "ms-vscode.makefile-tools"
