@@ -5,7 +5,7 @@ A comprehensive macOS setup script that automates the installation of developmen
 ## Quick Start
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/osx-bootstrap.sh | bash
+curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/Makefile | make -f - bootstrap
 ```
 
 ## What It Does
@@ -22,56 +22,31 @@ This bootstrap script will:
 
 ## Manual Installation
 
-If you prefer to run components individually:
+If you prefer to run locally:
 
 ```bash
 # Clone the repository
 git clone https://github.com/yon/osx-bootstrap.git
 cd osx-bootstrap
 
-# Install Homebrew packages (uses local Brewfile if available, remote otherwise)
-make brew-bundle
+# Run full bootstrap
+make bootstrap
 
-# Apply macOS system preferences (uses local scripts if available, remote otherwise)
-make osx-preferences
-
-# Update Brewfile with currently installed packages
-make brew-bundle-dump
+# See all available targets
+make help
 ```
+
+Run `make help` to see all available targets and their descriptions. Review the Makefile directly for implementation details and dependencies.
 
 ## Included Applications
 
-### Development Tools
-- Docker & Docker completion
-- Git (via Xcode tools) & GitHub CLI
-- Node.js, Python 3.12, Go, Rust
-- Terraform, jq, direnv
-- Visual Studio Code with extensions
-
-### Applications
-- **Productivity**: 1Password, Raycast, Rectangle
-- **Communication**: Slack, Signal, Telegram, WhatsApp, Discord
-- **Development**: Cursor, Charles Proxy
-- **Creative**: Figma
-- **AI Tools**: ChatGPT, Claude
-- **Utilities**: Google Drive, iStat Menus
-- **Mac App Store Apps**: Home Assistant, Okta Verify, WireGuard
+See the [Brewfile](Brewfile) for the complete list of applications and tools that will be installed. The Brewfile includes development tools, productivity apps, communication tools, and various utilities.
 
 ## System Preferences
 
-The script optionally configures macOS system preferences including:
+The bootstrap process can optionally configure macOS system preferences for Dock, Finder, Safari, Chrome, Terminal, and other applications. See the scripts in the [preferences/](preferences/) directory for details on what settings are modified.
 
-- **Dock**: Auto-hide, magnification, show indicators
-- **Finder**: Show extensions, path bar, status bar
-- **Safari**: Developer tools, privacy settings, custom download folder
-- **Chrome**: Custom download folder, disable print preview
-- **System**: Keyboard repeat rates, trackpad settings
-- **Terminal**: Custom profile and settings
-- **Rectangle**: Window management gap settings
-
-### Skipping System Preferences
-
-The default installation only installs packages. To apply system preferences:
+To apply system preferences:
 
 ```bash
 make osx-preferences

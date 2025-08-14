@@ -30,14 +30,7 @@ defaults write com.apple.terminal StringEncodings -array 4                      
   -c 'Delete :Window\ Settings:Basic:useOptionAsMetaKey' \
   ~/Library/Preferences/com.apple.terminal.plist 2>/dev/null || true
 
-# Download and apply custom terminal profile settings
-tmpfile=`/usr/bin/mktemp -t terminal.plist`
-curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/preferences/terminal.plist > ${tmpfile}
-
-# Merge the downloaded settings into the Basic profile
+# Apply custom terminal profile settings from local file
 /usr/libexec/PlistBuddy \
-  -c "Merge ${tmpfile} :Window\ Settings:Basic" \
+  -c "Merge $(dirname "$0")/terminal.plist :Window\ Settings:Basic" \
   ~/Library/Preferences/com.apple.terminal.plist
-
-# Clean up temporary file
-rm ${tmpfile}

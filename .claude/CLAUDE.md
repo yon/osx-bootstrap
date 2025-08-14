@@ -9,7 +9,6 @@ osx-bootstrap/
 ├── Brewfile            # Homebrew bundle file with all packages to install
 ├── Makefile            # Main automation file with targets for setup
 ├── README.md           # User documentation
-├── osx-bootstrap.sh    # Entry point script for remote installation
 ├── preferences/        # macOS system preference scripts
 │   ├── chrome.sh       # Chrome browser settings
 │   ├── dock.sh         # Dock appearance and behavior
@@ -31,10 +30,10 @@ osx-bootstrap/
 ## Key Commands
 
 ### Installation
-- **Remote install**: `curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/osx-bootstrap.sh | bash`
-- **Local Homebrew packages**: `make brew-bundle`
-- **Apply preferences**: `make osx-preferences`
-- **Update Brewfile**: `make brew-bundle-dump`
+- **Remote install**: `curl -fsSL https://raw.githubusercontent.com/yon/osx-bootstrap/master/Makefile | make -f - bootstrap`
+- **Local install**: `make bootstrap`
+
+Run `make help` to see all available targets, or review the Makefile directly for implementation details and dependencies.
 
 ### Testing
 - **Check shell script syntax**: `bash -n preferences/*.sh`
@@ -42,37 +41,17 @@ osx-bootstrap/
 
 ## Important Details
 
-### Makefile Targets
-1. **default**: Runs brew, brew-bundle, and dotfiles
-2. **brew**: Installs Homebrew if not present
-3. **brew-bundle**: Installs packages from Brewfile (local or remote)
-4. **brew-bundle-dump**: Updates Brewfile with currently installed packages
-5. **osx-preferences**: Applies all macOS system preferences
-6. **dotfiles**: Sets up dotfiles from separate repository
-
-### Preference Scripts Execution Order
-When running `make osx-preferences`, scripts execute in this order:
-1. system.sh (prompts for hostname)
-2. finder.sh
-3. dock.sh
-4. keyboard.sh
-5. safari.sh
-6. chrome.sh
-7. terminal.sh
-8. spaces.sh
-9. istat-menus.sh
-10. rectangle.sh
-
 ### Security Considerations
 - Terminal needs "Full Disk Access" in System Settings for Safari preferences
-- Scripts can run both locally and remotely (via curl)
+- Scripts prioritize local files when available, fall back to remote via curl
 - Administrator password required for system.sh (hostname changes)
 - All preference scripts should be executable (chmod +x)
+- Branch detection: defaults to current branch, falls back to origin HEAD, then 'master'
 
 ### Development Workflow
 1. Make changes to preference scripts or Brewfile
 2. Test syntax: `bash -n preferences/*.sh`
-3. Run locally: `make osx-preferences` or `make brew-bundle`
+3. Run locally to test changes
 4. Commit changes when satisfied
 5. Remote installations will use the committed version from GitHub
 
@@ -81,5 +60,4 @@ When running `make osx-preferences`, scripts execute in this order:
   1. Create the script in `preferences/`
   2. Make it executable with `chmod +x`
   3. Add it to both local and remote sections in Makefile
-  4. Update README.md documentation
 - Consider adding error handling for missing directories
