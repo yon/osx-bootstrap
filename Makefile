@@ -26,7 +26,7 @@ brew-bundle-dump:	brew
 
 .PHONY: brew-upgrade
 brew-upgrade:	brew
-	@brew update --force && brew list | xargs brew upgrade --force && brew cleanup
+	@brew update --force && brew list | xargs brew upgrade --force --quiet && brew cleanup
 
 .PHONY: dotfiles
 dotfiles:
