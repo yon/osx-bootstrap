@@ -29,7 +29,9 @@ brew-bundle-dump:	brew
 
 .PHONY: brew-upgrade
 brew-upgrade:	brew
-	@brew update --force && brew list | xargs brew upgrade --force --quiet && brew cleanup
+	@/opt/Homebrew/bin/brew update --force && \
+	  /opt/Homebrew/bin/brew list | xargs /opt/Homebrew/bin/brew upgrade --force --quiet && \
+	  /opt/Homebrew/bin/brew cleanup
 
 .PHONY: dotfiles
 dotfiles:
@@ -41,7 +43,7 @@ dotfiles:
 help:
 	@echo "Available targets:"
 	@echo "  default          - Help"
-	@echo "  bootstrap        - Perform full OSX Bootstrap (brew, preferences, dotfiles)"
+	@echo "  bootstrap        - Perform full OSX Bootstrap"
 	@echo "  brew             - Install Homebrew"
 	@echo "  brew-bundle      - Install packages from Brewfile"
 	@echo "  brew-bundle-dump - Export installed packages to Brewfile"
