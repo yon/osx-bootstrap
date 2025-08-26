@@ -29,7 +29,7 @@ brew-bundle-dump:	brew
 
 .PHONY: brew-upgrade
 brew-upgrade:	brew
-	@/opt/Homebrew/bin/brew update --force && \
+	@/opt/Homebrew/bin/brew update --force --quiet && \
 	  /opt/Homebrew/bin/brew list | xargs /opt/Homebrew/bin/brew upgrade --force --quiet && \
 	  /opt/Homebrew/bin/brew cleanup --prune=all
 
