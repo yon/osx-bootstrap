@@ -3,7 +3,7 @@ set -euo pipefail
 
 echo "Setting up backup SSH key..."
 
-BACKUP_KEY="/Volumes/ring/ssh/id_ed25519_backup"
+BACKUP_KEY="/Volumes/ring/ssh/id_ed25519"
 
 # Check if ring.dmg is mounted
 if [ ! -d "/Volumes/ring/ssh" ]; then
@@ -17,7 +17,7 @@ if [ -f "$BACKUP_KEY" ]; then
     echo "✓ Backup key already exists at $BACKUP_KEY"
 else
     echo "Creating backup ed25519 key..."
-    ssh-keygen -t ed25519 -C "yon@backup" -f "$BACKUP_KEY"
+    ssh-keygen -t ed25519 -C "yon@ring" -f "$BACKUP_KEY"
     echo "✓ Backup key created"
 fi
 
