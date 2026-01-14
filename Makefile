@@ -5,7 +5,7 @@ BRANCH ?= $(shell git branch --show-current 2>/dev/null || git symbolic-ref refs
 default: help
 
 .PHONY: bootstrap
-bootstrap:	brew-bundle osx-preferences dotfiles
+bootstrap:	brew-bundle osx-preferences dotfiles ssh
 
 .PHONY:	brew
 brew:	xcode-cli-tools /opt/homebrew/bin/brew
@@ -42,15 +42,17 @@ dotfiles:
 .PHONY: help
 help:
 	@echo "Available targets:"
-	@echo "  default          - Help"
 	@echo "  bootstrap        - Perform full OSX Bootstrap"
 	@echo "  brew             - Install Homebrew"
 	@echo "  brew-bundle      - Install packages from Brewfile"
 	@echo "  brew-bundle-dump - Export installed packages to Brewfile"
 	@echo "  brew-upgrade     - Update and upgrade all packages"
+	@echo "  default          - Help"
 	@echo "  dotfiles         - Setup dotfiles"
 	@echo "  help             - Show this help message"
 	@echo "  osx-preferences  - Apply macOS system preferences"
+	@echo "  ssh              - Setup Secure Enclave SSH keys"
+	@echo "  ssh-backup-key   - Create backup SSH key on ring.dmg"
 	@echo "  xcode-cli-tools  - Install Xcode Command Line Tools"
 
 .PHONY: osx-preferences
@@ -84,6 +86,24 @@ osx-preferences:
 		echo "Remote preferences applied successfully!"; \
 	fi
 	@echo "macOS preferences applied successfully!"
+
+.PHONY: ssh
+ssh:	brew-bundle
+	@echo "Setting up SSH with Secure Enclave..."
+	@if [ -d $(CURDIR)/ssh ]; then \
+		$(MAKE) -C $(CURDIR)/ssh all; \
+	else \
+		echo "SSH setup requires local checkout. Skipping..."; \
+	fi
+
+.PHONY: ssh-backup-key
+ssh-backup-key:
+	@echo "Setting up backup SSH key..."
+	@if [ -d $(CURDIR)/ssh ]; then \
+		$(MAKE) -C $(CURDIR)/ssh backup-key; \
+	else \
+		echo "SSH setup requires local checkout. Skipping..."; \
+	fi
 
 .PHONY: xcode-cli-tools
 xcode-cli-tools:	/Library/Developer/CommandLineTools/usr/bin/clang
