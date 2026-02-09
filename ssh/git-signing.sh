@@ -62,6 +62,10 @@ if command -v gh >/dev/null 2>&1 && gh auth status >/dev/null 2>&1; then
     else
         echo "✓ Key already registered on GitHub"
     fi
+
+    # Configure git credential helper to use gh
+    gh auth setup-git
+    echo "✓ Git credential helper configured to use gh"
 else
     echo ""
     echo "Add your signing key to GitHub manually:"
