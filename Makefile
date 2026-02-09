@@ -88,7 +88,7 @@ osx-preferences:
 	@echo "macOS preferences applied successfully!"
 
 .PHONY: ssh
-ssh:	brew-bundle
+ssh:
 	@echo "Setting up SSH with Secure Enclave..."
 	@if [ -d $(CURDIR)/ssh ]; then \
 		$(MAKE) -C $(CURDIR)/ssh all; \
