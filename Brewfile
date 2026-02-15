@@ -5,6 +5,7 @@ brew "ansible"
 brew "bash"
 brew "ca-certificates"
 brew "coreutils"
+brew "direnv"
 brew "docker"
 brew "esphome"
 brew "gettext"
@@ -62,6 +63,7 @@ mas "Okta Verify", id: 490179405
 mas "WireGuard", id: 1451685025
 mas "Xcode", id: 497799835
 vscode "4ops.terraform"
+vscode "anthropic.claude-code"
 vscode "anysphere.cursorpyright"
 vscode "anysphere.remote-containers"
 vscode "anysphere.remote-ssh"
