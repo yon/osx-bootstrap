@@ -61,7 +61,6 @@ cask "slack"
 cask "visual-studio-code"
 cask "whatsapp"
 mas "Home Assistant", id: 1099568401
-mas "Okta Verify", id: 490179405
 mas "WireGuard", id: 1451685025
 mas "Xcode", id: 497799835
 vscode "4ops.terraform"
