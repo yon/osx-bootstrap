@@ -60,6 +60,7 @@ cask "signal"
 cask "slack"
 cask "visual-studio-code"
 cask "whatsapp"
+cask "zoom"
 mas "Home Assistant", id: 1099568401
 mas "WireGuard", id: 1451685025
 mas "Xcode", id: 497799835
