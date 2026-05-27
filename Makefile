@@ -29,9 +29,9 @@ brew-bundle-dump:	brew
 
 .PHONY: brew-upgrade
 brew-upgrade:	brew
-	@/opt/Homebrew/bin/brew update --force --quiet && \
-	  /opt/Homebrew/bin/brew list | xargs /opt/Homebrew/bin/brew upgrade --force --quiet && \
-	  /opt/Homebrew/bin/brew cleanup --prune=all
+	@/opt/homebrew/bin/brew update --force --quiet && \
+	  /opt/homebrew/bin/brew list | xargs /opt/homebrew/bin/brew upgrade --force --quiet && \
+	  /opt/homebrew/bin/brew cleanup --prune=all
 
 .PHONY: dotfiles
 dotfiles:
